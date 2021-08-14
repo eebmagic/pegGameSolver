@@ -9,5 +9,10 @@
     "start": "node app.js"
   },
   "author": "E Bolton",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "cookie-parse": "^0.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
 }
