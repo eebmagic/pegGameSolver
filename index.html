@@ -16,7 +16,7 @@
 
     <svg id="input-screen" height="280" width="400">
       <g id="board">
-        <polygon points="200,0 31,277 370,277"></polygon>
+        <polygon points="200,0 31,277 370,277" style="fill:gray;stroke:black;stroke-width:3"></polygon>
 
         <!-- row one -->
         <text x="192" y="60" class="heavy">1</text>
@@ -61,7 +61,7 @@
     </div>
 
     <script type="text/javascript">
-      // Script for peg selection
+      // Script for allowing peg selections
       const pegs = document.getElementsByClassName('peg');
       const showClick = (e) => {
         if (event.target.dataset.clicked == 'true') {

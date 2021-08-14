@@ -39,12 +39,6 @@ line {
     stroke-width: 3;
 }
 
-polygon {
-    fill: gray;
-    stroke: black;
-    stroke-width: 3;
-}
-
 .peg {
     stroke-width: 3;
     stroke: black;
