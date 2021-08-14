@@ -235,8 +235,6 @@ function flatPosition(x, y) {
 /////////////////////////////////////////////////////////////////////////////
 
 function main() {
-  console.log('STARTING MAIN FUNC!!!');
-
   // Load board
   let pegs = processPegs();
   let startBoard = makeBoard(pegs);
@@ -286,11 +284,6 @@ function main() {
       let posC = validMove(posA, posB);
       let startPeg = pegs[flatPosition(posA[0], posA[1])-1];
       let stopPeg = pegs[flatPosition(posC[0], posC[1])-1];
-      console.log('Start peg:');
-      console.log(startPeg);
-      console.log(startPeg.getAttribute('cx'), startPeg.getAttribute('cy'))
-      console.log('Stop peg:');
-      console.log(stopPeg);
 
       let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
       line.setAttribute('x1', startPeg.getAttribute('cx'));
@@ -314,6 +307,4 @@ function main() {
     target.appendChild(moveTitle);
     target.appendChild(boardResult);
   })
-
 }
-
