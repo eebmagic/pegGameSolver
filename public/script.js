@@ -1,3 +1,7 @@
+/**
+ *  Load peg states from front end and convert to board shaped matrix.
+ *  The resulting board is used in the constructor for a Board object.
+ */
 function processPegs() {
   let values = Array(15).fill(false);
   let pegs = document.getElementsByClassName('peg');
@@ -18,14 +22,14 @@ function processPegs() {
   return out;
 }
 
+/**
+ *  Where a and b are two coordinates (x, y).
+ *  Checks that peg at point a can possibly jump point b.
+ * 
+ *  Return the new position of peg a after jumping peg b.
+ *  Return false if jump not possible.
+ */
 function validMove(a, b) {
-  /**
-   *  Where a and b are two coordinates (x, y).
-   *  Checks that peg at point a can possibly jump point b.
-   * 
-   *  Return the new position of peg a after jumping peg b.
-   *  Return false if jump not possible.
-   */
   // console.log(`a: ${a}`);
   // console.log(`b: ${b}`);
   if (a == b) return false;
@@ -77,10 +81,10 @@ function validMove(a, b) {
   return out;
 }
 
+/**
+ *  Make a deep copy of a board matrix.
+ */
 function makeBoardCopy(boardMatrix) {
-  /**
-   *  Make a deep copy of a board matrix.
-   */
   let out = [];
   boardMatrix.forEach(row => {
     out.push(row.slice());
@@ -90,7 +94,9 @@ function makeBoardCopy(boardMatrix) {
 
 function makeBoard(triboardArr) {
   /**
-   * Board object
+   *  Board object
+   *  For the DFS algo implementation boards work as nodes,
+   *  and possible moves work as edges.
    */
   return {
     board: makeBoardCopy(triboardArr),
@@ -102,11 +108,11 @@ function makeBoard(triboardArr) {
       [4, 2], [4, 3], [4, 4]
     ],
 
+    /**
+     *  Iterate over all peg pairs and check for valid moves.
+     *  Return a list of all (a, b) peg pairs (where a can jump b).
+     */
     getMoves: function() {
-      /**
-       *  Iterate over all peg pairs and check for valid moves.
-       *  Return a list of all (a, b) peg pairs (where a can jump b).
-       */
       let out = [];
       for (let aInd = 0; aInd < this.points.length; aInd++) {
         for (let bInd = 0; bInd < this.points.length; bInd++) {
@@ -137,17 +143,16 @@ function makeBoard(triboardArr) {
       return total;
     },
 
+    /**
+     *  Check valid move and perform corresponding flips on board.
+     */
     makeMove: function(a, b) {
-      /**
-       *  Check valid move and perform corresponding flips on board.
-       */
       let c = validMove(a, b);
       if (c == false) {
         console.log(`Invalid move: ${a} -> ${b}`);
         return;
       }
 
-      // Check c is available
       let aValid = this.board[a[0]][a[1]] == true;
       let bValid = this.board[b[0]][b[1]] == true;
       let cValid = this.board[c[0]][c[1]] == false;
@@ -164,11 +169,11 @@ function makeBoard(triboardArr) {
   }
 }
 
+/**
+ *  Count how many true values in a board matrix.
+ *  Return int total true values.
+ */
 function evalMatrix(boardMatrix) {
-  /**
-   *  Count how many true values in a board matrix.
-   *  Return int total true values.
-   */
   let total = 0;
   boardMatrix.forEach(row => {
     row.forEach(value => {
@@ -178,12 +183,12 @@ function evalMatrix(boardMatrix) {
   return total;
 }
 
+/**
+ *  Recursive DFS implementation to find longest path.
+ *  Longest path in this case will involve removing the
+ *  most number of pegs possible (each step in path being a removal).
+ */
 function recSolve(board, path) {
-  /**
-   *  Recursive DFS implementation to find longest path.
-   *  Longest path in this case will involve removing the
-   *  most number of pegs possible (each step in path being a removal).
-   */
   let moves = board.getMoves();
   if (moves.length == 0) {
     return path;
@@ -205,15 +210,88 @@ function recSolve(board, path) {
   return bestPath;
 }
 
+/**
+ * Flatten board matrix to make it easier to iterate later.
+ */
+function flattenMatrix(matrix) {
+  let out = [];
+  matrix.forEach(item => {
+    item.forEach(subitem => {
+      out.push(subitem);
+    });
+  });
+  return out;
+}
+
+/**
+ *  Convert (x, y) position used in matrix to peg label for front-end.
+ */
+function flatPosition(x, y) {
+  let total = 0;
+  for (let i=1; i<=x; i++) total += i;
+  return total + y + 1;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+
 function main() {
   console.log('STARTING MAIN FUNC!!!');
-  let pegs = processPegs();
 
+  // Load board
+  let pegs = processPegs();
   let startBoard = makeBoard(pegs);
+
+  // Run algorithm
   let nextMove = recSolve(startBoard, [[null, startBoard.board]]);
-  console.log("Next move:");
-  console.log(nextMove);
   let finalTotal = evalMatrix(nextMove[nextMove.length-1][1]);
-  console.log(`FINAL BOARD HAS ${finalTotal} PEGS`);
+
+  // Remove old board displays
+  let oldBoards = document.getElementsByClassName("board-display");
+  Array.from(oldBoards).forEach(board => board.remove())
+  let oldTitle = document.getElementsByTagName("h2");
+  Array.from(oldTitle).forEach(title => title.remove());
+  let oldLabels = document.getElementsByTagName("h4");
+  Array.from(oldLabels).forEach(label => label.remove());
+
+  // Get board elements
+  let target = document.getElementById("body");
+  let template = document.getElementById("input-screen").cloneNode(true);
+  template.setAttribute('class', 'board-display');
+
+  // Add title
+  let header = document.createElement("h2");
+  header.innerText = "Solution Steps:";
+  target.append(header);
+
+  // Add board for each step in solution path
+  nextMove.forEach(item => {
+    let move = item[0];
+    let board = item[1];
+    let boardResult = template.cloneNode(true);
+    let pegs = Array.from(boardResult.getElementsByClassName("peg"));
+
+    // Set peg position states
+    flattenMatrix(board).forEach((value, ind) => {
+      if (value) {
+        pegs[ind].setAttribute('data-clicked', 'true');
+      } else {
+        pegs[ind].setAttribute('data-clicked', 'false');
+      }
+    });
+
+    // Make move description
+    let moveTitle = document.createElement("h4");
+    if (move) {
+      let newPos = validMove(move[0], move[1]);
+      moveTitle.innerText = `${flatPosition(move[0][0], move[0][1])} -> ${flatPosition(newPos[0], newPos[1])}`;
+    } else {
+      moveTitle.innerText = "Start Position"
+    }
+
+    // Add elements
+    target.appendChild(moveTitle);
+    target.appendChild(boardResult);
+  })
+
 }
 

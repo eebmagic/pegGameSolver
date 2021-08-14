@@ -18,37 +18,56 @@
     </style>
   </head>
 
-  <body>
-    <h1>TEST IN PAGE</h1>
+  <body id="body">
+    <h1>PEG GAME SOLVER</h1>
+    <p>Place your pegs on the board and hit the button<p>
     <script src="script.js"></script>
 
-    <svg height="404" width="600">
-      <polygon points="300,0 131,277 470,277" style="fill:gray;stroke:black;stroke-width:3"></polygon>
-      <!-- row one -->
-      <circle class="peg" data-clicked="false" cx="300" cy="50" r="20"></circle>
-      <!-- row two -->
-      <circle class="peg" data-clicked="false" cx="270" cy="100" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="330" cy="100" r="20"></circle>
-      <!-- row three -->
-      <circle class="peg" data-clicked="false" cx="240" cy="150" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="300" cy="150" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="360" cy="150" r="20"></circle>
-      <!-- row four -->
-      <circle class="peg" data-clicked="false" cx="210" cy="200" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="270" cy="200" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="330" cy="200" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="390" cy="200" r="20"></circle>
-      <!-- row five -->
-      <circle class="peg" data-clicked="false" cx="180" cy="250" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="240" cy="250" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="300" cy="250" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="360" cy="250" r="20"></circle>
-      <circle class="peg" data-clicked="false" cx="420" cy="250" r="20"></circle>
+    <svg id="input-screen" height="280" width="600">
+      <g id="board">
+        <polygon points="300,0 131,277 470,277" style="fill:gray;stroke:black;stroke-width:3"></polygon>
+
+        <!-- row one -->
+        <text x="292" y="60" class="heavy">1</text>
+        <circle class="peg" data-clicked="false" cx="300" cy="50" r="20"></circle>
+        <!-- row two -->
+        <text x="262" y="110" class="heavy">2</text>
+        <text x="322" y="110" class="heavy">3</text>
+        <circle class="peg" data-clicked="false" cx="270" cy="100" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="330" cy="100" r="20"></circle>
+        <!-- row three -->
+        <text x="232" y="160" class="heavy">4</text>
+        <text x="292" y="160" class="heavy">5</text>
+        <text x="352" y="160" class="heavy">6</text>
+        <circle class="peg" data-clicked="false" cx="240" cy="150" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="300" cy="150" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="360" cy="150" r="20"></circle>
+        <!-- row four -->
+        <text x="202" y="210" class="heavy">7</text>
+        <text x="262" y="210" class="heavy">8</text>
+        <text x="322" y="210" class="heavy">9</text>
+        <text x="373" y="210" class="heavy">10</text>
+        <circle class="peg" data-clicked="false" cx="210" cy="200" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="270" cy="200" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="330" cy="200" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="390" cy="200" r="20"></circle>
+        <!-- row five -->
+        <text x="164" y="260" class="heavy">11</text>
+        <text x="222" y="260" class="heavy">12</text>
+        <text x="283" y="260" class="heavy">13</text>
+        <text x="343" y="260" class="heavy">14</text>
+        <text x="402" y="260" class="heavy">15</text>
+        <circle class="peg" data-clicked="false" cx="180" cy="250" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="240" cy="250" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="300" cy="250" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="360" cy="250" r="20"></circle>
+        <circle class="peg" data-clicked="false" cx="420" cy="250" r="20"></circle>
+      </g>
     </svg>
 
-    <!-- <button id="start-button" onClick="processPegs()">FIND SOLUTION</button> -->
-    <button id="start-button" onClick="main()">FIND SOLUTION</button>
-    <!-- <button id="start-button">FIND SOLUTION</button> -->
+    <div class="container">
+      <button id="start-button" onClick="main()">FIND SOLUTION</button>
+    </div>
 
     <script type="text/javascript">
       // Script for allowing peg selections
