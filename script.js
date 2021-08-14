@@ -279,6 +279,28 @@ function main() {
       }
     });
 
+    // Add line
+    if (move) {
+      let posA = move[0];
+      let posB = move[1];
+      let posC = validMove(posA, posB);
+      let startPeg = pegs[flatPosition(posA[0], posA[1])-1];
+      let stopPeg = pegs[flatPosition(posC[0], posC[1])-1];
+      console.log('Start peg:');
+      console.log(startPeg);
+      console.log(startPeg.getAttribute('cx'), startPeg.getAttribute('cy'))
+      console.log('Stop peg:');
+      console.log(stopPeg);
+
+      let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute('x1', startPeg.getAttribute('cx'));
+      line.setAttribute('y1', startPeg.getAttribute('cy'));
+      line.setAttribute('x2', stopPeg.getAttribute('cx'));
+      line.setAttribute('y2', stopPeg.getAttribute('cy'));
+
+      boardResult.appendChild(line);
+    }
+
     // Make move description
     let moveTitle = document.createElement("h4");
     if (move) {

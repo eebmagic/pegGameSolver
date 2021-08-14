@@ -1,18 +1,18 @@
 h1 {
-    text-align: center;
     background: lightgray;
+    font: bold 30px sans-serif;
 }
 
 h2 {
-    text-align: center;
+    font: bold 25px sans-serif;
 }
 
 h4 {
-    text-align: center;
+    font: 20px sans-serif;
 }
 
 p {
-    text-align: center;
+    font: 20px sans-serif;
 }
 
 .container {
@@ -30,13 +30,18 @@ body {
     margin: 20px;
 }
 
+line {
+    stroke: red;
+    stroke-width: 3;
+}
+
 .peg {
     stroke-width: 3;
     stroke: black;
     fill: yellow;
 }
 
-.peg:hover {
+.peg[data-clicked='false']:hover {
     fill-opacity: 0.6;
 }
 
