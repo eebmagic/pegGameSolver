@@ -1,0 +1,10 @@
+
+Board:
+    - constructor(triangleArr)
+    - getPossibleMoves()
+        return all possible moves
+        list of objects
+        (start, finish, removed?)
+    - move(start, finish)
+        validate move
+        enact move

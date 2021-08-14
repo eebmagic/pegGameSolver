@@ -1,0 +1,12 @@
+{
+  "name": "peg_game_solver",
+  "version": "1.0.0",
+  "description": "Solver for Cracker Barrel peg game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "E Bolton",
+  "license": "ISC"
+}

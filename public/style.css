@@ -1,0 +1,17 @@
+.peg {
+    stroke-width: 3;
+    stroke: black;
+    fill: yellow;
+}
+
+.peg:hover {
+    fill-opacity: 0.6;
+}
+
+.peg[data-clicked='false'] {
+    fill-opacity: 0.15;
+}
+
+.peg[data-clicked='true'] {
+    fill-opacity: 1;
+}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Peg Game Solver</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+      #login, #loggedin {
+        display: none;
+      }
+      .text-overflow {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 500px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>TEST IN PAGE</h1>
+    <script src="script.js"></script>
+
+    <svg height="404" width="600">
+      <polygon points="300,0 131,277 470,277" style="fill:gray;stroke:black;stroke-width:3"></polygon>
+      <!-- row one -->
+      <circle class="peg" data-clicked="false" cx="300" cy="50" r="20"></circle>
+      <!-- row two -->
+      <circle class="peg" data-clicked="false" cx="270" cy="100" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="330" cy="100" r="20"></circle>
+      <!-- row three -->
+      <circle class="peg" data-clicked="false" cx="240" cy="150" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="300" cy="150" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="360" cy="150" r="20"></circle>
+      <!-- row four -->
+      <circle class="peg" data-clicked="false" cx="210" cy="200" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="270" cy="200" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="330" cy="200" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="390" cy="200" r="20"></circle>
+      <!-- row five -->
+      <circle class="peg" data-clicked="false" cx="180" cy="250" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="240" cy="250" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="300" cy="250" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="360" cy="250" r="20"></circle>
+      <circle class="peg" data-clicked="false" cx="420" cy="250" r="20"></circle>
+    </svg>
+
+    <button id="start-button" onClick="processPegs()">FIND SOLUTION</button>
+    <!-- <button id="start-button">FIND SOLUTION</button> -->
+
+    <script type="text/javascript">
+      // Script for allowing peg selections
+      const pegs = document.getElementsByClassName('peg');
+      const showClick = (e) => {
+        if (event.target.dataset.clicked == 'true') {
+          event.target.dataset.clicked = 'false';
+        } else {
+          event.target.dataset.clicked = 'true';
+        }
+      }
+
+      for (let i=0; i < pegs.length; i++) {
+        pegs[i].addEventListener('click', showClick, false);
+      }
+    </script>
+
+  </body>
+</html>
+
