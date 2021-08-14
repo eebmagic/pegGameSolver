@@ -64,7 +64,7 @@ function validMove(a, b) {
       // Down right
       // console.log("Down right");
       out = [b[0]+1, b[1]+1];
-    } else if (b[1] + 1 == a[1]) {
+    } else if (b[1] + 1 == a[1] && b[0] + 1 == a[0]) {
       // Up left
       // console.log("Up left");
       out = [b[0]-1, b[1]-1];
