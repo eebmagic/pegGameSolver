@@ -1,18 +1,22 @@
 h1 {
     background: lightgray;
     font: bold 30px sans-serif;
+    text-align: left;
 }
 
 h2 {
     font: bold 25px sans-serif;
+    text-align: left;
 }
 
 h4 {
     font: 20px sans-serif;
+    text-align: left;
 }
 
 p {
     font: 20px sans-serif;
+    text-align: left;
 }
 
 .container {
